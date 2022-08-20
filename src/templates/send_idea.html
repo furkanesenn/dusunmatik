@@ -1,0 +1,47 @@
+{% extends 'base.html' %} 
+
+{% block head %} <link rel="stylesheet" href="/static/send_idea.css"> <link rel="stylesheet" href="/static/home.css"> <script src="/static/send_idea.js" defer></script> {% endblock head %}
+
+{% block title %}Fikir Bırak{% endblock title %}
+
+{% block content %} 
+    <div class="current_topic">
+        <h5>{{topic.idea_name}}</h5>
+        <p>{{topic.idea_description}}</p>
+
+        <div class="ekler">
+            <a href="https://dergipark.org.tr/tr/download/article-file/2461841" target="_blank">Makale</a>
+            <a href="https://www.milliyet.com.tr/molatik/teknoloji/metaverse-nedir-6638788" target="_blank">Haber</a>
+            <a href="https://www.youtube.com/watch?v=WL-IMYqVn8s" target="_blank">Belgesel</a>
+        </div>
+    </div>
+
+    <div class="your-idea">
+        <form action="./send_idea_to_server" method="post">
+            {% csrf_token %}
+
+            <label for="idea">Fikrinizi yazın:</label>
+            <textarea name="idea" id="idea" cols="30" rows="10" class="textfield-primary idea" style="height: 12rem; width: 100%" wrap="hard" style="font-size: 155px"></textarea>
+
+            <div class="preview">
+                <h6>Yorumunuz şöyle gözükecek:</h6>
+                <div class="idea">
+                    <div class="left-layout">
+                        <div class="interactions">
+                            <a class="material-symbols-outlined">favorite<a> 
+                            <a class="material-symbols-outlined">comment<a>
+                            <a class="material-symbols-outlined">share<a>
+                        </div>
+                        <span class="datetime">XX.XX</span>
+                    </div>
+                    <div class="right-layout">
+                        <h4><a href="./auth/profile/{{idea.idea_author.username}}">{{user.username}}</a></h4>
+                        <p class="reason">Yorumunuzu yazmaya başladığınızda burada ön-görünüm bulunacak.</p>
+                    </div>
+                </div>
+            </div>
+
+            <input type="submit" value="gönder" class="btn-primary">
+        </form>
+    </div>
+{% endblock content %} 

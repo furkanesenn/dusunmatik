@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block head %} <link rel="stylesheet" href="/static/profile.css"> {% endblock head %}
+
+{% block title %}
+    {% if username == user.username %} 
+        Hesabım
+    {% else %} 
+        {{ username }}
+    {% endif %}
+{% endblock title %}
+
+{% block content %} 
+<div class="profile-show">
+    <h2>Justhink - {{username}}</h2>
+    <div class="profile-view">
+        <div class="profile-avatar">
+            <!-- <img src="/static/maskot.svg" alt=""> -->
+        </div>
+        <br>
+        <div class="stats">
+            <ul>
+                <li>Kullanıcı Adı: <span>{{ username }}</span></li> 
+                <li>E-Posta: <span>{{ user.email }} ({% if profile.is == False %}<a href="../resendverification">Doğrulanmamış</a>{% else %}Doğrulanmış{% endif %})</span></li> 
+                <li>Telefon Numarası: <span>{{ profile.phone_number }} ({% if profile.phone_number != "" and profile.is_phone_verified == False %}<a href="../phonenumberverification">Doğrulanmamış</a>{% elif profile.is_phone_verified == True %}Doğrulanmış{% else %}<a href="edit_profile">Eklenmemiş</a>{% endif %})</span></li> 
+                
+                <br>
+                <li>Beğenilme: <span>{{ profile.my_idea_likes }}</span></li>
+                <li>Yorumlanma: <span>{{ profile.my_idea_comments }}</span></li>
+                <li>Paylaşılan Fikir: <span>{{ profile.total_ideas }}</span></li> <br>
+                <li>Beğenme: <span>{{ profile.liked_ideas }}</span></li> 
+                <li>Yorumlama: <span>{{ profile.commented_ideas }}</span></li> <br>
+                <li>Anlık Skor: <span>{{ profile.total_score }}</span></li> 
+                <li>Toplam Skor: <span>{{ profile.total_score }}</span></li> <br>
+            
+                
+            </ul>
+        </div>
+
+        <div class="control-btns">
+            <div class="edit-fields">
+                <a href="edit_profile" class="btn-primary edit_profile">Profili Düzenle</a>
+                <a href="edit_account" class="btn-primary edit_account">Hesabı Düzenle</a> 
+            </div>
+            <a href="change_password" class="btn-primary change_pass">Şifreyi Değiştir</a>  
+        </div>
+    </div>
+</div>
+<div class="favourite-ideas">
+
+</div>
+{% endblock %}

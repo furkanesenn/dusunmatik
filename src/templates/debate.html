@@ -1,0 +1,56 @@
+{% extends 'base.html' %} 
+
+{% block head %} <link rel="stylesheet" href="/static/debate.css"> {% endblock head %}
+
+{% block title %}Münazara {% endblock title %}
+
+{% block content %} 
+    <div class="countdown topic-layout">
+        <h5>{% if not started %} Bu haftanın münazarasına son: {% else %} Bu haftanın münazarasının bitmesine son: {% endif %}</h5>
+        <ul class="countdown__list">
+            <li>
+                <div>{{ days }}</div>Gün
+            </li>
+            <li>
+                <div>{{ hours }}</div>Saat
+            </li>
+            <li>
+                <div>{{ minutes }}</div>Dakika
+            </li>
+        </ul>
+    </div>
+
+    <div class="topic-of-the-week topic-layout">
+        <div class="top">
+            <h5>Haftanın konusu:</h5>
+            <div>{{ debate.debate_topic }}</div>
+        
+        </div>
+
+        <div class="bottom">
+            <div>Hükümet Savunur: ?</div>
+            <div>Muhalefet Savunur: ?</div>
+        </div>
+    </div>
+
+    {% if debateactor %} 
+    <a href="../debate/start_now" class="apply-debate topic-layout" style="font-size:1rem">
+        <span class="{% if not started or not debateactor %}btn-disabled{% endif %}">Münazaraya Başla{% if not started %}<br> 
+            ({{days}} gün, {{hours}} saat, {{minutes}} dakika sonra aktif olacak){% endif %}</span>
+    </a>
+    {% else %}
+    <a href="../debate/apply_now" class="apply-debate topic-layout" style="font-size:1rem">
+        <span class="{% if announced %}btn-disabled{% endif %}">Münazaraya Başvur</span>
+    </a>
+    {% endif %}
+    <a href="#" class="apply-debate topic-layout">
+        <span class="{% if not started %}btn-disabled{% endif %}">İzleyici Olarak Katıl{% if not started %}<br> 
+            ({{days}} gün, {{hours}} saat, {{minutes}} dakika sonra aktif olacak){% endif %}</span>
+    </a>
+
+    {% if announced == True %}
+        <div class="details">
+            {{ debateactor.actor_user_account.username }}: {{ debateactor.actor_team }}
+        </div>
+    {% endif %}
+{% endblock content %}

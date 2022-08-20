@@ -1,0 +1,46 @@
+{% extends 'base.html' %} 
+
+{% block head %} <link rel="stylesheet" href="/static/trends.css"> <link rel="stylesheet" href="/static/send_idea.css"> <link rel="stylesheet" href="/static/home.css">{% endblock head %}
+
+{% block title %}Trendler{% endblock title %}
+
+{% block content %} 
+<div class="current_topic">
+    <h5>{{topic.idea_name}}</h5>
+    <p>{{topic.idea_description}}</p>
+
+    <div class="ekler">
+        <a href="https://dergipark.org.tr/tr/download/article-file/2461841" target="_blank">Makale</a>
+        <a href="https://www.milliyet.com.tr/molatik/teknoloji/metaverse-nedir-6638788" target="_blank">Haber</a>
+        <a href="https://www.youtube.com/watch?v=WL-IMYqVn8s" target="_blank">Belgesel</a>
+    </div>
+</div>
+
+    <div class="ideas">
+        <ul>
+            {% for idea in trend_ideas %}
+                <li>
+                    <div class="idea">
+
+                        <div class="left-layout">
+                            <div class="interactions">
+                                <div class="likes">
+                                    <a href="./like_idea/{{idea.id}}" class="material-symbols-outlined">favorite<a> <span>{{ idea.idea_likes }}</span> 
+                                </div>
+                                <div class="comments">
+                                    <a href="./inspect_idea/{{idea.id}}" class="material-symbols-outlined">comment<a> <span>{{ idea.idea_comments }}</span>
+                                </div>
+                                <a href="./share_idea/{{idea.id}}" class="material-symbols-outlined" onclick="shareIdea()">share<a>
+                            </div>
+                            <span class="datetime">{{ idea.comment_publish_date }}</span>
+                        </div>
+                        <div class="right-layout">
+                            <h4><a href="./auth/profile/{{idea.idea_author.username}}">{{idea.idea_author.username}}</a></h4>
+                            <p class="reason">{{idea.idea_content}}.</p>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock content %} 

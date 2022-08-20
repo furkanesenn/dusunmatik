@@ -1,0 +1,18 @@
+{% extends 'base.html' %} 
+
+{% block title %}Giriş Yap{% endblock %}
+
+{% block head %} <link rel="stylesheet" href="/static/auth.css"> {% endblock %}
+
+{% block content %}
+    <h2>Giriş Yap</h2>
+    <small>Hesabına giriş yapmak için aşağıdaki kutucuklara bilgilerini gir ve butona tıkla.</small>
+    <form action="./attemptlogin" method="post">
+        {% csrf_token %}
+
+        <input type="text" name="username" id="username" placeholder="Kullanıcı adın">
+        <input type="password" name="password" id="password" placeholder="Şifren">
+
+        <input type="submit" value="Giriş Yap">
+    </form>
+{% endblock %}

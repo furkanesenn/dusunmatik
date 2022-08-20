@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block head %} <link rel="stylesheet" href="/static/profile.css"> {% endblock head %}
+
+{% block title %}
+    Profilimi Düzenle
+{% endblock title %}
+
+{% block content %} 
+<h2>Justhink - Profili Düzenle: {{username}}</h2>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Kaydet" class="btn-primary" style="margin-top:1rem">
+    <a href="./" style="margin-left: 1rem">Vazgeç</a>
+</form>
+
+{% endblock %}

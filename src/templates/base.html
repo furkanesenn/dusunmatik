@@ -1,0 +1,304 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Justhink - {% block title %} {% endblock %}</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto+Mono:wght@400&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* user-select: none; */
+        }
+
+        html {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        :root {
+            --color-primary: {% if profile.ui_theme == "tema1" %}#7E4EAC{% elif profile.ui_theme == "tema2" %}#7B9987{% elif profile.ui_theme == "tema3" %}#767676{% endif %};
+            --color-primary-dark:{% if profile.ui_theme == "tema1" %}#8948c7{% elif profile.ui_theme == "tema2" %}#7b9187{% elif profile.ui_theme == "tema3" %}#666{% endif %}; 
+            --color-secondary: {% if profile.ui_theme == "tema1" %}#D8B6F8{% elif profile.ui_theme == "tema2" %}#DBDAD8{% elif profile.ui_theme == "tema3" %}#DBDAD8{% endif %};
+            --color-body: {% if profile.ui_theme == "tema1" %}#E7D5F8{% elif profile.ui_theme == "tema2" %}#A7BFB1{% elif profile.ui_theme == "tema3" %}#D1CFCF{% endif %};
+            --bgcolor-navitem: {% if profile.ui_theme == "tema1" %}#E7D5F8{% elif profile.ui_theme == "tema2" %}#A7BFB1{% elif profile.ui_theme == "tema3" %}#D1CFCF{% endif %};
+            --txtcolor-navitem: {% if profile.ui_theme == "tema1" %}#444{% elif profile.ui_theme == "tema2" %}#fff{% elif profile.ui_theme == "tema3" %}#444{% endif %};
+            --color-feeditem-hover: {% if profile.ui_theme == "tema1" %}#E7D5F8{% elif profile.ui_theme == "tema2" %}#daf8d5{% elif profile.ui_theme == "tema3" %}#ddd{% endif %};
+            --color-white: #eee; 
+        
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .nav-item {
+            background-color: var(--bgcolor-navitem) !important;
+            color: var(--txtcolor-navitem) !important;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        body {
+            background-color: var(--color-body);
+        }
+
+
+        .textfield-primary {
+            background-color: var(--color-primary);
+            /* padding: 2rem 8rem; */
+            width: 25rem;
+            height: 4rem;
+            border-radius: .5rem;
+            margin-top: .2rem;
+            color: var(--color-white);
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            padding: .6rem 2rem;
+            border: none;
+            border-radius: .25rem;
+        }
+
+        .btn-disabled {
+            opacity: .5;
+        }
+
+        .alert{
+            position: absolute;
+            background: #F7EEFF;
+            padding: .6rem 2rem;
+            min-width: 420px;
+            /* transform: translateX(1rem) translateY(1rem); */
+            margin-left: 1rem;
+            margin-top: 1rem;
+            width: 10rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            border-radius: .4rem;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+            color: var(--color-primary);
+
+            z-index: 500;
+        }
+        .alert.showAlert{
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .alert.show{
+            animation: show_slide 5s ease forwards;
+        }
+        @keyframes show_slide {
+            0%{
+            transform: translateX(-100%);
+            }
+            25%{
+            transform: translateX(0%);
+            }
+            75% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                visibility: hidden;
+                display: none;
+            }
+        }
+        .alert .material-symbols-outlined {
+            font-size: 1.5rem;
+            /* content: 'check_circle' */
+        }
+        .alert .msg{
+            font-size: .8rem;
+            color: var(--color-primary);
+        }
+
+        @media screen and (min-height: 649px) {
+    html {
+        font-size: 30px;
+    }
+
+    .idea .left-layout * {
+        font-size: 1rem
+    }
+}
+
+    @media screen and (max-height: 648px) {
+        .feed-item {
+            flex-basis: 8.7rem;
+            height: 8rem;
+        }
+    }
+
+    @media screen and (max-width: 1800px) {
+        html {
+            font-size: 1.75rem;
+        }
+    }
+
+    @media screen and (max-width: 1700px) {
+        html {
+            font-size: 1.65rem;
+        }
+    }
+
+    @media screen and (max-width: 1600px) {
+        html {
+            font-size: 1.55rem;
+        }
+    }
+
+    @media screen and (max-width: 1500px) {
+        html {
+            font-size: 1.45rem;
+        }
+    }
+
+    @media screen and (max-width: 1400px) {
+        html {
+            font-size: 1.35rem;
+        }
+    }
+
+    @media screen and (max-width: 1300px) {
+        html {
+            font-size: 1.25rem;
+        }
+    }
+
+    @media screen and (max-width: 1200px) {
+        html {
+            font-size: 1.15rem;
+        }
+    }
+    @media screen and (max-width: 1100px) {
+        html {
+            font-size: 1.05rem;
+        }
+    }
+    @media screen and (max-width: 1080px) {
+        html {
+            font-size: .95rem;
+        }
+        .feed {
+            flex-wrap: wrap;
+            gap: 1rem
+        }
+
+        main {
+            flex-direction: column;
+        }
+    }
+
+
+    @media screen and (min-height: 1100px) and (min-width: 1100px) {
+        html {
+            font-size: 1.6rem;
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        nav {
+            flex-direction: column;
+        }
+    }
+
+    @media screen and (max-width: 300px) {
+        html {
+            font-size: .75rem;
+        }
+        
+    }
+
+    @media screen and (min-height: 1200px) {
+        html {
+            font-size: 2.5rem;
+        }
+    }
+    @media screen and (min-height: 2000px) {
+        html {
+            font-size: 4rem;
+        }
+    }
+    @media screen and (min-height: 4000px) {
+        html {
+            font-size: 8rem;
+        }
+    }
+
+    </style> 
+    <link rel="stylesheet" href="/static/index.css">
+    
+    {% block head %}
+
+    {% endblock head %}
+
+</head>
+<body>
+    
+<header>
+    <nav>
+        <h1>Justhink</h1>
+        <ul class="navbar__nav">
+            <li><a class="nav-item"  href="../..">Anasayfa</a></li>
+            {% if user.is_authenticated %}
+                  <li><a class="nav-item" href="/auth/logout">Çıkış Yap</a></li>            
+                  <li><a class="nav-item" href="/auth/profile">Hesabım</a></li>    
+            {% else %}  
+                <li><a class="nav-item" href="/auth/login">Giriş Yap</a></li>
+                <li><a class="nav-item" href="/auth/register">Kayıt Ol</a></li>
+            {% endif %}
+
+            <li><a class="nav-item" href="#help">?</a></li>
+        </ul>
+    </nav>
+</header>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <!-- <li{% if message.tags %} class="{{ message.tags }}"{% endif %}> -->
+        <div class="alert showAlert show {{ message.tags }}">
+            <span class="material-symbols-outlined">
+                {{ message.extra_tags }}
+            </span>
+            <span class="msg">{{ message }}!</span>
+        </div>
+    
+    {% endfor %}
+</ul>
+{% endif %}
+
+<main>
+    {% block content %}
+
+    {% endblock content %}
+</main>
+
+
+
+</body>
+</html> 

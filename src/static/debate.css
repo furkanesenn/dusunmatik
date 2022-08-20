@@ -1,0 +1,76 @@
+main {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.countdown {
+    font-size: 1.4rem !important;
+}
+
+.countdown h5 {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.countdown ul {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    font-weight: 500;
+}
+
+.countdown ul div {
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.topic-layout { 
+    flex-basis: 49%;
+    background-color: var(--color-primary);
+    border-radius: .5rem;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    color: var(--color-white);
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.topic-of-the-week h5 {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.topic-of-the-week .top div {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.topic-of-the-week .bottom {
+    opacity: 0.75;
+}
+
+.apply-debate {
+    font-weight: 500;
+    transition: opacity .2s ease-in; 
+    display: flex;
+    
+    align-items: center;
+    justify-content: center;
+    font-size: .9rem;
+}
+
+.apply-debate:not(.btn-disabled):hover {
+    opacity: 0.95;
+}
+
+@media screen and (max-width: 1080px) {
+    main {
+        flex-wrap: wrap;
+    }
+    .topic-layout {
+        flex-basis: 100%;
+    }
+}

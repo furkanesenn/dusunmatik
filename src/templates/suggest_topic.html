@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Konu Önerme{% endblock title %}
+
+{% block head %} <link rel="stylesheet" href="/static/suggest_topic.css"> {% endblock head %}
+
+{% block content %}  
+    <div class="last-topics">
+        <h2>Daha Önceki Konular</h2>
+        <ul class="last-topics__list disc-list">
+            <li>Einstein'ın yerinde olsaydınız atom bombasını icat eder miydiniz?.</li>
+            <li>Gelecekte insan gücüne gerek kalacak mı?</li>
+            <li>Sanatçıların gelir kaygısı gütmeden sanat yapabilmesi için ne gerekli?</li>
+            <li>Teknoloji tarihindeki en büyük üç gelişme</li>
+            <li>Kuantum bilgisayar gündelik kullanıma açılacak mı?</li>
+            <li>Periyodik tablodaki elementleri isimlendirecek olsaydınız nasıl isimlendirirdiniz?</li>
+            <li>İlk ve son cümlesi aynı olan bir kitap yazsaydınız bu cümle ne olurdu?</li>
+            <li>Her gün 1 saat fazla zamanınız olsaydı ne yapardınız?</li>
+            <li>Pangea neden var oldu?</li>
+
+        </ul>
+    </div>
+
+    <form action="./suggest_topic_to_server" method="POST">
+        {% csrf_token %} 
+        <div class="topic-suggestion">
+            <label for="topic">Konu önerinizi giriniz:*</label> <br>
+            <textarea name="topic" id="topic" cols="30" rows="10" class="textfield-primary"></textarea>
+        </div>
+        <div class="topic-keywords">
+            <label for="keywords">Konu anahtar kelimelerinizi giriniz (5 Kelime):*</label> <br>
+            <textarea name="keywords" id="keywords" cols="30" rows="10" class="textfield-primary"></textarea>
+        </div>
+
+        <input type="submit" value="gönder" class="btn-primary">
+    </form>
+{% endblock content %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Anasayfa{% endblock %}
+
+{% block head %} <link rel="stylesheet" href="static/home.css"> <script src="/static/home.js" defer></script> {% endblock %} 
+
+{% block content %} 
+<div class="todays-topic">
+    <h3>Günün Konusu: <span>{{topic.idea_name}}</span></h3>
+    <div class="stats">
+        <div class="toplam-oylama">
+            toplam fikir: <span>{{ ideas|length }}</span>
+        </div>
+        <div class="toplam-yorum">
+            toplam yorum: <span>{{ comments|length }}</span>
+        </div>
+    </div>
+</div>
+
+<div class="feed">
+    <a href="./discord/trends" class="trends feed-item"> 
+        <span class="material-symbols-outlined">
+            whatshot
+            </span>
+        trendler
+        </a>
+    <a href="./discord/favourites" class="favourites feed-item">
+        <span class="material-symbols-outlined">
+            favorite
+            </span>
+        favoriler
+    </a>
+    <a href="./discord/random_ideas" class="random-comment feed-item">
+        <span class="material-symbols-outlined">
+            shuffle
+            </span>    
+        rastgele yorum
+    </a>
+    <a href="./discord/send_idea" class="give-idea feed-item">
+        <span class="material-symbols-outlined">
+            lightbulb
+            </span>fikir bırak
+    </a>
+    <a href="./discord/suggest_topic" class="suggest-topic feed-item"><span class="material-symbols-outlined">
+        how_to_vote
+        </span>konu öner</a>
+    <a href="./discord/debate" class="debate feed-item">
+        <span class="material-symbols-outlined">
+            forum
+            </span>münazara</a>
+</div>
+
+
+<div class="ideas">
+    {% for idea in ideas %}
+    <div class="idea">
+
+        <div class="left-layout">
+            <div class="interactions">
+                <div class="likes">
+                    <a href="./discord/like_idea/{{idea.id}}" class="material-symbols-outlined">favorite<a> <span>{{ idea.idea_likes }}</span> 
+                </div>
+                <div class="comments">
+                    <a href="./discord/inspect_idea/{{idea.id}}" class="material-symbols-outlined">comment<a> <span>{{ idea.idea_comments }}</span>
+                </div>
+                <a href="./discord/share_idea/{{idea.id}}" class="material-symbols-outlined" onclick="shareIdea()">share<a>
+            </div>
+            <span class="datetime">{{ idea.comment_publish_date }}</span>
+        </div>
+        <div class="right-layout">
+            <h4><a href="./auth/profile/{{idea.idea_author.username}}">{{idea.idea_author.username}}</a></h4>
+            <p class="reason">{{idea.idea_content}}.</p>
+        </div>
+    </div>
+    {% endfor %}
+</div> 
+{% endblock %}

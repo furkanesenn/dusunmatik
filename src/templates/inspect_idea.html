@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Fikir ({{idea.id}}){% endblock title %}
+
+{% block head %} <link rel="stylesheet" href="/static/inspect_idea.css"> <link rel="stylesheet" href="/static/home.css"> <script src="/static/home.js" defer></script> {% endblock head %}
+
+{% block content %}
+<div class="idea" >
+
+    <div class="left-layout">
+        <div class="interactions">
+            <div class="likes">
+                <a href="../like_idea/{{idea.id}}" class="material-symbols-outlined">favorite<a> <span>{{ idea.idea_likes }}</span> 
+            </div>
+            <div class="comments">
+                <a href="../inspect_idea/{{idea.id}}" class="material-symbols-outlined">comment<a> <span>{{ idea.idea_comments }}</span>
+            </div>
+            <a href="../share_idea/{{idea.id}}" class="material-symbols-outlined" onclick="shareIdea()">share<a>
+        </div>
+        <span class="datetime">{{ idea.comment_publish_date }}</span>
+    </div>
+    <div class="right-layout">
+        <h4><a href="../../auth/profile/{{idea.idea_author.username}}">{{idea.idea_author.username}}</a></h4>
+        <p class="reason">{{idea.idea_content}}.</p>
+    </div>
+
+</div>
+<div class="comments" style="font-weight: 300">
+    {% for comment in comments %}
+    <b style="font-weight: 500">{{ comment.comment_author }}:</b> {{ comment.comment_content }} <br>
+    {% endfor %}    
+</div>
+
+<form action="../comment_idea/{{idea.id}}" method="post">
+    {% csrf_token %}
+    <input type="text" name="content" id="content" placeholder="Yorum İçeriği" style="width: 88%">
+    <input type="submit" value="Gönder" class="btn-primary">
+</form>
+{% endblock content %}
